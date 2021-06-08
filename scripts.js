@@ -19,8 +19,10 @@ function init() {
         let userInput = confirm("Confirm that the shuttle is ready for takeoff");
         if (userInput) {
                 document.getElementById("flightStatus").innerText = "Shuttle in flight.";
-                document.getElementById("shuttleBackground").style.backgroundImage = "repeating-radial-gradient(purple, blue 20%)";
+                document.getElementById("shuttleBackground").style.backgroundColor = "blue";
                 document.getElementById("spaceShuttleHeight").innerText = 10000;
+                rocket.style.top = "250px"
+                rocket.style.right = "0px"
             }
         })
     
@@ -35,7 +37,7 @@ function init() {
             let userInput = confirm("Confirm that you want to abort the mission");
             if(userInput) {
                 document.getElementById("flightStatus").innerText = "Mission aborted";
-                document.getElementById("shuttleBackground").style.backgroundImage = "radial-gradient(red, yellow)";
+                document.getElementById("shuttleBackground").style.backgroundColor = "green)";
                 document.getElementById("spaceShuttleHeight").innerText = 0;
             }
         })
@@ -45,7 +47,7 @@ function init() {
                 ypos += -10;
                 rocket.style.top = `${ypos}px`;
                 spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) + 10000;
-                shuttleBackground.style.backgroundImage = "repeating-radial-gradient(purple, blue 20%)";
+                shuttleBackground.style.backgroundColor = "blue";
                 flightStatus.innerHTML = "Shuttle in flight.";
             }               
         })        
@@ -76,6 +78,7 @@ function init() {
             if (event.defaultPrevented) {
                 return;
             }
+            
 
             switch (event.key) {
                 case "Down":
@@ -85,6 +88,10 @@ function init() {
                         spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) - 10000;
                     }        
                 case "ArrowDown":
+                    if (ypos === 250) {
+                        document.getElementById("flightStatus").innerText = "The shuttle has landed.";
+                        document.getElementById("shuttleBackground").style.backgroundColor = "green";
+                    }
                     if (ypos < 250) {
                         ypos += 10;
                         rocket.style.top = `${ypos}px`;
@@ -97,15 +104,15 @@ function init() {
                         ypos += -10;
                         rocket.style.top = `${ypos}px`;
                         spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) + 10000;
-                        shuttleBackground.style.backgroundImage = "repeating-radial-gradient(purple, blue 20%)";
+                        shuttleBackground.style.backgroundColor = "blue";
                         flightStatus.innerHTML = "Shuttle in flight.";
                     }    
-                case "ArrowUp":
+                case "ArrowUp": 
                     if (ypos > 0) {
                         ypos += -10;
                         rocket.style.top = `${ypos}px`;
                         spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) + 10000;
-                        shuttleBackground.style.backgroundImage = "repeating-radial-gradient(purple, blue 20%)";
+                        shuttleBackground.style.backgroundColor = "blue";
                         flightStatus.innerHTML = "Shuttle in flight.";
                     }   
                   break;
@@ -123,12 +130,12 @@ function init() {
                   break;
 
                 case "Right": 
-                if (xpos < (-(Number(shuttleBackground.offsetWidth) / 2) + 25)) {
+                    if (xpos < (-(Number(shuttleBackground.offsetWidth) / 2) + 25)) {
                         xpos += -10;
                         rocket.style.right = `${xpos}px`;
                     }     
-                case "ArrowRight":
-                    if (xpos < 250) {
+                case "ArrowRight":                    
+                    if (xpos > (-(Number(shuttleBackground.offsetWidth) / 2) + 25)) {
                         xpos += -10;
                         rocket.style.right = `${xpos}px`;
                     }     
